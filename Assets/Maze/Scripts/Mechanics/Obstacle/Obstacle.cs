@@ -62,7 +62,7 @@ namespace Maze.Mechanics.Obstacle {
         }
 
         public void Read(Database.Cursor cur, Reader reader, int levelId, bool restoreState) {
-            position = reader.GetInt32("POS");
+            position = reader.GetInt32("OBSTACLE_POS");
             RetrieveItems(cur, levelId,restoreState);
         }
         public void RetrieveItems(int levelId, bool restoreState = true){
@@ -88,7 +88,7 @@ namespace Maze.Mechanics.Obstacle {
         }
 
         public void Save(Database.Cursor cur, bool complete) {
-            cur.commandText = String.Format("INSERT INTO OBSTACLE (LEVEL_ID, OBSTACLE_ID_LEVEL, NAME, POS) VALUES({0}, {1}, \"{2}\", {3});", LevelManager.currentLevel.id, obstacleId, gameObject.name.Replace("(Clone)", ""), position);
+            cur.commandText = String.Format("INSERT INTO OBSTACLE (LEVEL_ID, OBSTACLE_ID_LEVEL, NAME, OBSTACLE_POS) VALUES({0}, {1}, \"{2}\", {3});", LevelManager.currentLevel.id, obstacleId, gameObject.name.Replace("(Clone)", ""), position);
             
             int ret = cur.ExecuteNonQuery();
 
